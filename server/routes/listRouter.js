@@ -25,11 +25,13 @@ pool.on('error', (error) => {
 
 // GET request from database
 listRouter.get('/', (req, res) => {
+    // run query
     let queryText = 'SELECT * FROM allTasks;';
+    // process query
     pool.query(queryText)
     .then((result) => {
         console.log('results from DB', result);
-        res.send(result.rows)
+        res.send(result.rows); // send query result as rows as a response to the client
     })
     .catch((error) => {
         console.log('error getting data', error);
@@ -41,9 +43,11 @@ listRouter.get('/', (req, res) => {
 // POST request to database
 listRouter.post('/', (req, res) => {
     newTask = req.body;
+    // run the query in database
     const queryText = `INSERT INTO allTasks ("task", "complete")
     VALUES ('${newTask}')`;
 
+    // process the query
     pool.query(queryText)
     .then((result) => {
         console.log('result', result);
