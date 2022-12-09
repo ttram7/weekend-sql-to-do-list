@@ -13,6 +13,7 @@ function sendTask() {
         }
     }).then(function(response){
         console.log('in POST', response);
+        $('#taskIn').val();
         //getTasks();
     }).catch(function(error){
         console.log(error);

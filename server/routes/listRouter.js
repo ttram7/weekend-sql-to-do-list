@@ -32,7 +32,7 @@ listRouter.get('/', (req, res) => {
         res.send(result.rows)
     })
     .catch((error) => {
-        console.log('error making a query', error);
+        console.log('error getting data', error);
         res.sendStatus(500);
     })
     console.log('GET request from server');
@@ -40,9 +40,20 @@ listRouter.get('/', (req, res) => {
 
 // POST request to database
 listRouter.post('/', (req, res) => {
+    newTask = req.body;
     const queryText = `INSERT INTO allTasks ("task", "complete")
-    VALUES ()`
-})
+    VALUES ('${newTask}')`;
+
+    pool.query(queryText)
+    .then((result) => {
+        console.log('result', result);
+        res.sendStatus(201);
+    })
+    .catch((error) => {
+        console.log('error making a query', error);
+        res.sendStatus(500);
+    });
+});
 
 
 module.exports = listRouter;
