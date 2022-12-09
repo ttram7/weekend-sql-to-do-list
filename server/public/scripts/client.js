@@ -9,7 +9,7 @@ function sendTask() {
         type: 'POST',
         url: '/tasks',
         data: {
-            task:$('#taskIn').val(),
+            task:$('#taskIn').val()
         }
     }).then(function(response){
         console.log('in POST', response);
@@ -19,3 +19,15 @@ function sendTask() {
         alert(error.response);
     });
 }
+
+function getTasks() {
+    $.ajax({
+        type: 'GET',
+        url: '/tasks'
+    }).then(function(response){
+        console.log('in /GET', response);
+        //appendToDom(response);
+    })
+}
+
+//function appendToDom();
