@@ -14,7 +14,7 @@ function sendTask() {
         }
     }).then(function(response){
         console.log('in POST', response);
-        $('#taskIn').val();
+        $('#taskIn').val('');
         getTasks();
     }).catch(function(error){
         console.log(error);
@@ -28,7 +28,7 @@ function getTasks() {
         url: '/tasks'
     }).then(function(response){
         // received database response
-        console.log('in /GET', response);
+        console.log('in GET', response);
         //appendToDom(response);
     })
 }
