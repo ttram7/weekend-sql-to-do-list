@@ -29,8 +29,17 @@ function getTasks() {
     }).then(function(response){
         // received database response
         console.log('in GET', response);
-        //appendToDom(response);
+        appendToDom(response);
     })
 }
 
-//function appendToDom();
+function appendToDom(array){
+    $('#viewTasks').empty();
+    for (item of array) {
+        $('#viewTasks').append(`
+        <p>${item.task}</p>
+        <button type="button" id="completeBtn">Complete</button>
+        <button type="button" id="deleteBtn">Delete</button>
+        <br>`)
+    };
+};
