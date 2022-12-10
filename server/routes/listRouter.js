@@ -1,27 +1,7 @@
 let express = require('express');
 let listRouter = express.Router();
-
-// import pg
-const pg = require('pg');
-// create Pool
-const Pool = pg.Pool;
-
-// DB connection
-const pool = new Pool({
-    database: 'weekend-to-do-app',
-    host: 'localhost',
-    port: 5432,
-    max: 10,
-    idleTimeoutMillis: 30000,
-});
-
-pool.on('connect', () => {
-    console.log('postgres is connected');
-});
-
-pool.on('error', (error) => {
-    console.log('error in connecting to database:', error);
-});
+// because there is a pool.js file
+const pool = require('../modules/pool');
 
 // GET request from database
 listRouter.get('/', (req, res) => {
@@ -42,12 +22,12 @@ listRouter.get('/', (req, res) => {
 // POST request to database
 listRouter.post('/', (req, res) => {
     const newTask = req.body;
-    // run the query in database
+    // run the query in database, sanitize inputs
     const queryText = `INSERT INTO "allTasks" ("task", "complete")
-    VALUES ('${newTask.task}', 'N')`;
+    VALUES ($1, $2);`;
 
     // process the query
-    pool.query(queryText)
+    pool.query(queryText, [newTask.task, 'N'])
     .then((result) => {
         console.log('result', result);
         res.sendStatus(201);
