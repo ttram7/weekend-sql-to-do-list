@@ -4,6 +4,7 @@ function readyNow() {
     console.log('in JQ');
     $('#addTaskBtn').on('click', sendTask);
     $('#viewTasks').on('click', '#completeBtn', completeTask);
+    $('#viewTasks').on('click', '#deleteBtn', deleteTask);
     getTasks();
 }
 
@@ -42,13 +43,28 @@ function appendToDom(array){
         <div id="indvTask">
         <p>${item.task}</p>
         <button type="button" id="completeBtn">Complete</button>
-        <button type="button" id="deleteBtn">Delete</button>
+        <button type="button" id="deleteBtn" data-id="${item.id}">Delete</button>
         </div>
         <br>`)
+        console.log(item.id);
     };
 };
 
 function completeTask() {
     console.log('in completeTask');
     $(this).parent().css('background-color', 'green');
+}
+
+function deleteTask() {
+    const taskId = $(this).data('id');
+    console.log(taskId);
+    $.ajax({
+        type: 'DELETE',
+        url: '/tasks/${taskId}'
+    }).then(function(response) {
+        getTasks();
+    }).catch(function(error) {
+        console.log(error);
+        alert('error occurred');
+    });
 }

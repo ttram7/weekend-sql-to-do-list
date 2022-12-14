@@ -7,7 +7,7 @@ app.use(express.urlencoded());
 
 // import router from routes folder
 const listRouter = require('./routes/listRouter');
-// ROUTES
+// requests that go to this route will go to this router
 app.use('/tasks', listRouter);
 
 app.listen(port, () => {

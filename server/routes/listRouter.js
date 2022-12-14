@@ -38,5 +38,16 @@ listRouter.post('/', (req, res) => {
     });
 });
 
+// if no id in url, there will be a 404 error
+listRouter.delete('/:id', (req, res) => {
+    const taskId = req.params.id; // whatever is after params is what's after the :
+    const queryText = `DELETE FROM "allTasks" WHERE "id" = $1`;
+    pool.query(queryText, [taskId])
+    .then((result) => {
+        res.sendStatus(200);
+    }).catch((error) => {
+        res.sendStatus(500);
+    });
+});
 
 module.exports = listRouter;
