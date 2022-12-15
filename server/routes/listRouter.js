@@ -50,4 +50,10 @@ listRouter.delete('/:id', (req, res) => {
     });
 });
 
+listRouter.put('/complete/:id', (req, res) => {
+    console.log(req.params.id);
+    console.log(req.body.complete);
+    const complete = req.body.complete;
+})
+
 module.exports = listRouter;

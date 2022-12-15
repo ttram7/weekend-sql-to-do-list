@@ -50,9 +50,20 @@ function appendToDom(array){
     };
 };
 // <button type="button" id="deleteBtn" data-id="${item.id}">Delete</button>
+// PUT request
 function completeTask() {
     console.log('in completeTask');
     $(this).parent().css('background-color', 'green');
+    const id = $(this).parent().data('id');
+    $.ajax({
+        type: 'PUT',
+        url: `/tasks/complete/${id}`,
+        data: {complete: 'Y'}
+    }).then(function() {
+        getTasks();
+    }).catch(function(error){
+        console.log('error with putting', error);
+    })
 }
 
 function deleteTask() {
