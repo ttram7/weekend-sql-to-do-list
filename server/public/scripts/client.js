@@ -40,27 +40,27 @@ function appendToDom(array){
     $('#viewTasks').empty();
     for (item of array) {
         $('#viewTasks').append(`
-        <div id="indvTask">
+        <div id="indvTask" data-id=${item.id}>
         <p>${item.task}</p>
         <button type="button" id="completeBtn">Complete</button>
-        <button type="button" id="deleteBtn" data-id="${item.id}">Delete</button>
+        <button type="button" id="deleteBtn">Delete</button>
         </div>
         <br>`)
         console.log(item.id);
     };
 };
-
+// <button type="button" id="deleteBtn" data-id="${item.id}">Delete</button>
 function completeTask() {
     console.log('in completeTask');
     $(this).parent().css('background-color', 'green');
 }
 
 function deleteTask() {
-    const taskId = $(this).data('id');
-    console.log(taskId);
+    const taskId = $(this).parent().data('id');
+    console.log('in delete task', taskId);
     $.ajax({
         type: 'DELETE',
-        url: '/tasks/${taskId}'
+        url: `/tasks/${taskId}`
     }).then(function(response) {
         getTasks();
     }).catch(function(error) {
