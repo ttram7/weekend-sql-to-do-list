@@ -2,7 +2,7 @@ $(readyNow);
 
 function readyNow() {
     console.log('in JQ');
-    $('#addTaskBtn').on('click', sendTask);
+    $('.addTaskBtn').on('click', sendTask);
     $('#viewTasks').on('click', '.completeBtn', completeTask);
     $('#viewTasks').on('click', '.deleteBtn', deleteTask);
     getTasks();
@@ -41,7 +41,7 @@ function appendToDom(array){
     for (item of array) {
         let listItem = $(`
             <div class="indvTask" data-id=${item.id}>
-                <p>${item.task}</p>
+                <p class="taskText">${item.task}</p>
                 <button type="button" class="completeBtn">Complete</button>
                 <button type="button" class="deleteBtn">Delete</button>
             </div>
@@ -49,6 +49,7 @@ function appendToDom(array){
         `)
         if (item.complete === 'Y') {
             listItem.css('background-color', 'green');
+            //$('.taskText').css('text-decoration', 'line-through');
         }
         $('#viewTasks').append(listItem);
     }

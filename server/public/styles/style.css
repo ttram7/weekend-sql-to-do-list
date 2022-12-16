@@ -1,0 +1,46 @@
+.addTaskBtn {
+    cursor: pointer;
+}
+
+body {
+    text-align: left;
+    width: 500px;
+    margin: auto;
+    font-size: large;
+}
+
+.completeBtn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 8px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.deleteBtn {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 8px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+header {
+    text-align: center;
+}
+
+.indvTask {
+    
+}
+
+input {
+    width: 75%;
+}
+
+
