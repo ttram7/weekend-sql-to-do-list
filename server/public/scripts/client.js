@@ -3,8 +3,8 @@ $(readyNow);
 function readyNow() {
     console.log('in JQ');
     $('#addTaskBtn').on('click', sendTask);
-    $('#viewTasks').on('click', '#completeBtn', completeTask);
-    $('#viewTasks').on('click', '#deleteBtn', deleteTask);
+    $('#viewTasks').on('click', '.completeBtn', completeTask);
+    $('#viewTasks').on('click', '.deleteBtn', deleteTask);
     getTasks();
 }
 
@@ -39,21 +39,26 @@ function getTasks() {
 function appendToDom(array){
     $('#viewTasks').empty();
     for (item of array) {
-        $('#viewTasks').append(`
-        <div id="indvTask" data-id=${item.id}>
-        <p>${item.task}</p>
-        <button type="button" id="completeBtn">Complete</button>
-        <button type="button" id="deleteBtn">Delete</button>
-        </div>
-        <br>`)
-        console.log(item.id);
-    };
+        let listItem = $(`
+            <div class="indvTask" data-id=${item.id}>
+                <p>${item.task}</p>
+                <button type="button" class="completeBtn">Complete</button>
+                <button type="button" class="deleteBtn">Delete</button>
+            </div>
+            <br>
+        `)
+        if (item.complete === 'Y') {
+            listItem.css('background-color', 'green');
+        }
+        $('#viewTasks').append(listItem);
+    }
+    
 };
-// <button type="button" id="deleteBtn" data-id="${item.id}">Delete</button>
+
 // PUT request
 function completeTask() {
     console.log('in completeTask');
-    $(this).parent().css('background-color', 'green');
+    //$(this).parent().css('background-color', 'green');
     const id = $(this).parent().data('id');
     $.ajax({
         type: 'PUT',
@@ -64,6 +69,7 @@ function completeTask() {
     }).catch(function(error){
         console.log('error with putting', error);
     })
+
 }
 
 function deleteTask() {

@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 // GET request from database
 listRouter.get('/', (req, res) => {
     // run query
-    let queryText = 'SELECT * FROM "allTasks";';
+    let queryText = 'SELECT * FROM "allTasks" ORDER BY "id" ASC;';
     // process query
     pool.query(queryText)
     .then((result) => {
@@ -54,6 +54,24 @@ listRouter.put('/complete/:id', (req, res) => {
     console.log(req.params.id);
     console.log(req.body.complete);
     const complete = req.body.complete;
-})
 
+    let queryText = '';
+    if (complete === 'Y') {
+        queryText = `UPDATE "allTasks" SET "complete" = 'Y' WHERE "id" = ${req.params.id};`
+    } else {
+        res.sendStatus(500);
+        return;
+    }
+    pool.query(queryText)
+    .then((dbResponse) => {
+        console.log('dbResponse', dbResponse);
+        res.sendStatus(200);
+    })
+    .catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
+});
+
+// task status add on
 module.exports = listRouter;
