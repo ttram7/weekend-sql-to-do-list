@@ -76,13 +76,34 @@ function completeTask() {
 function deleteTask() {
     const taskId = $(this).parent().data('id');
     console.log('in delete task', taskId);
-    $.ajax({
-        type: 'DELETE',
-        url: `/tasks/${taskId}`
-    }).then(function(response) {
-        getTasks();
-    }).catch(function(error) {
-        console.log(error);
-        alert('error occurred');
+    swal({
+        title: 'Are you sure you want to delete this task?',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true
+    })
+    .then((willDelete)=> {
+        if (willDelete) {
+            $.ajax({
+                type: 'DELETE',
+                url: `/tasks/${taskId}`
+            }).then(function(response) {
+                getTasks();
+            }).catch(function(error) {
+                console.log(error);
+                alert('error occurred');
+            });
+        } else {
+            return;
+        };
     });
-}
+    // $.ajax({
+    //     type: 'DELETE',
+    //     url: `/tasks/${taskId}`
+    // }).then(function(response) {
+    //     getTasks();
+    // }).catch(function(error) {
+    //     console.log(error);
+    //     alert('error occurred');
+    // });
+};
