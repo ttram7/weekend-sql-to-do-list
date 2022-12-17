@@ -2,11 +2,18 @@
     cursor: pointer;
 }
 
+.addTasks {
+   background-color: white;
+}
+
 body {
     text-align: left;
-    width: 500px;
+    width: 700px;
     margin: auto;
     font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+    
+    
 }
 
 .completeBtn {
@@ -16,8 +23,13 @@ body {
     padding: 10px 20px;
     text-align: center;
     border-radius: 8px;
-    display: inline-block;
+    float: right;
     cursor: pointer;
+}
+
+.completed {
+    color: #4CAF50;
+    text-decoration: line-through;
 }
 
 .deleteBtn {
@@ -27,12 +39,13 @@ body {
     padding: 10px 20px;
     text-align: center;
     border-radius: 8px;
-    display: inline-block;
+    float: right;
     cursor: pointer;
 }
 
 header {
     text-align: center;
+    background-color: white;
 }
 
 .indvTask {
@@ -40,7 +53,20 @@ header {
 }
 
 input {
-    width: 75%;
+    width: 60%;
+    
 }
 
+.output {
+    background-color: white;
+}
+
+table {
+    border-collapse: collapse;
+    width: 700px;
+}
+
+.taskText {
+    width: 600px;
+}
 
