@@ -1,9 +1,15 @@
 .addTaskBtn {
+    background-color: white;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
+    color: blue;
+    padding: 5px 8px;
+    text-align: center;
 }
 
-.addTasks {
-   background-color: white;
+#addTasks {
+   padding-bottom: 10px;
 }
 
 body {
@@ -12,6 +18,7 @@ body {
     margin: auto;
     font-size: large;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: skyblue;
     
     
 }
@@ -45,7 +52,7 @@ body {
 
 header {
     text-align: center;
-    background-color: white;
+    
 }
 
 .indvTask {
@@ -53,16 +60,18 @@ header {
 }
 
 input {
+    margin-left: 100px;
+    padding: 5px;
     width: 60%;
     
 }
 
-.output {
+#output {
     background-color: white;
 }
 
 table {
-    border-collapse: collapse;
+    border: 1px solid;
     width: 700px;
 }
 

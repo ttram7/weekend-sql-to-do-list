@@ -8,6 +8,7 @@ function readyNow() {
     getTasks();
 }
 
+// send user input to database
 function sendTask() {
     $.ajax({
         type: 'POST',
@@ -25,6 +26,7 @@ function sendTask() {
     });
 }
 
+// client receives data from database
 function getTasks() {
     $.ajax({
         type: 'GET',
@@ -36,6 +38,8 @@ function getTasks() {
     })
 }
 
+// data is appended to DOM as a table
+// if a task is listed as 'Y' for complete, text color will change to green and be striked-through
 function appendToDom(array){
     $('#viewTasks').empty();
     for (item of array) {
@@ -54,7 +58,7 @@ function appendToDom(array){
     
 };
 
-// PUT request
+// task's complete status will be marked 'Y' in database
 function completeTask() {
     console.log('in completeTask');
     const id = $(this).parent().parent().data('id');
@@ -70,6 +74,8 @@ function completeTask() {
 
 }
 
+// pop-up alert msg will appear when user clicks on delete btn
+// if user selects 'OK', task is removed from database and DOM
 function deleteTask() {
     const taskId = $(this).parent().parent().data('id');
     console.log('in delete task', taskId);
